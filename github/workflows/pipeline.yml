@@ -3,16 +3,14 @@ name: Executar Pipeline JS
 on:
   push:
     branches:
-      - main  # ou a branch principal do seu projeto
+      - main 
 
   schedule:
-    # Executa o workflow toda meia-noite (horário UTC)
     - cron: '0 0 * * *'
 
 jobs:
   executar_script:
-    runs-on: ubuntu-latest  # Usa a imagem mais recente do Ubuntu
-
+    runs-on: ubuntu-latest  
     steps:
       - name: Checkout do Repositório
         uses: actions/checkout@v3
@@ -20,14 +18,13 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18' # Defina a versão do Node.js que seu projeto usa
+          node-version: '18' 
 
       - name: Instalar Dependências
-        run: npm install  # ou 'yarn install' se você usa Yarn
+        run: npm install  
 
       - name: Executar o Script do Pipeline
         run: node seu_script_de_coleta.js
         env:
-          # Adicione suas variáveis de ambiente aqui
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           API_KEY: ${{ secrets.API_KEY }}
